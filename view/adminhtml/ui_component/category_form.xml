@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2025. All rights reserved.
+  ~ @author: Volodymyr Hryvinskyi <mailto:volodymyr@hryvinskyi.com>
+  -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="search_engine_optimization">
+        <field name="robots_meta_tag" sortOrder="100" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Robots Meta Tag</label>
+                <dataScope>robots_meta_tag</dataScope>
+                <tooltip>
+                    <description translate="true">Controls search engine indexing for this category page. Configure default settings at Stores > Configuration > Hryvinskyi Extensions -> SEO > Meta Robots</description>
+                </tooltip>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Hryvinskyi\SeoRobotsCategory\Model\Category\Attribute\Source\RobotsMetaTag"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="apply_robots_to_products" sortOrder="101" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Apply Robots to Category Products</label>
+                <dataScope>apply_robots_to_products</dataScope>
+                <tooltip>
+                    <description translate="true">Enable to apply robots meta tag to all products in this category. Configure default settings at Stores > Configuration > Hryvinskyi Extensions -> SEO > Meta Robots</description>
+                </tooltip>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="product_robots_meta_tag" sortOrder="102" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Robots for Category Products</label>
+                <dataScope>product_robots_meta_tag</dataScope>
+                <tooltip>
+                    <description translate="true">Robots meta tag for products in this category (only applies if "Apply Robots to Category Products" is enabled). Configure default settings at Stores > Configuration > Hryvinskyi Extensions -> SEO > Meta Robots</description>
+                </tooltip>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <visible>false</visible>
+                <imports>
+                    <link name="visible">ns = ${ $.ns }, index = apply_robots_to_products:checked</link>
+                </imports>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Hryvinskyi\SeoRobotsCategory\Model\Category\Attribute\Source\ProductRobotsMetaTag"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

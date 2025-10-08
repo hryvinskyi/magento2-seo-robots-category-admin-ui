@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2025. All rights reserved.
+  ~ @author: Volodymyr Hryvinskyi <mailto:volodymyr@hryvinskyi.com>
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="hryvinskyi_seo" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="robots">
+                <group id="category" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Robots Category</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Category Robots</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[
+                            Enable robots meta tag management for categories and their products<br/>
+                            <strong style="font-size:18px">How to Use</strong><br/>
+                            <strong>Category Robots Settings:</strong><br/>
+                            1. Go to <strong>Catalog > Categories</strong><br/>
+                            2. Edit any category and expand <strong>Search Engine Optimization</strong> section<br/>
+                            3. Configure the following fields:<br/>
+                            <ul>
+                                <li><strong>Robots Meta Tag</strong> - Controls indexing for the category page itself</li>
+                                <li><strong>Apply Robots to Category Products</strong> - Enable to apply robots settings to products in this category</li>
+                                <li><strong>Robots for Category Products</strong> - Choose robots settings for products (shown when toggle is enabled)</li>
+                            </ul>
+                            <br/>
+                            <strong>Available Options:</strong><br/>
+                            <ul>
+                                <li><strong>Use Config</strong> - Use default system settings</li>
+                                <li><strong>Use Category Robots</strong> - Inherit from category's robots setting (products only)</li>
+                                <li><strong>INDEX, FOLLOW</strong> - Allow search engines to index and follow links</li>
+                                <li><strong>NOINDEX, FOLLOW</strong> - Don't index but follow links</li>
+                                <li><strong>INDEX, NOFOLLOW</strong> - Index but don't follow links</li>
+                                <li><strong>NOINDEX, NOFOLLOW</strong> - Don't index and don't follow links</li>
+                                <li><strong>NOARCHIVE variants</strong> - Same as above but prevent caching</li>
+                            </ul>
+                            <br/>
+                            <strong>Example: Warehouse Deals Category</strong><br/>
+                            To prevent indexing of Warehouse Deals category and its products:<br/>
+                            1. Set <strong>Robots Meta Tag</strong> to "NOINDEX, NOFOLLOW"<br/>
+                            2. Enable <strong>Apply Robots to Category Products</strong><br/>
+                            3. Set <strong>Robots for Category Products</strong> to "Use Category Robots" or "NOINDEX, NOFOLLOW"
+                        ]]></comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>
