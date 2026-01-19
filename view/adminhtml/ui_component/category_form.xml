@@ -6,90 +6,430 @@
 
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <!-- Advanced Robots Settings Modal -->
+    <modal name="advanced_robots_modal" provider="category_form.category_form_data_source">
+        <settings>
+            <options>
+                <option name="buttons" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="text" xsi:type="string" translate="true">Done</item>
+                        <item name="class" xsi:type="string">action-primary</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">${ $.name }</item>
+                                <item name="actionName" xsi:type="string">actionDone</item>
+                            </item>
+                        </item>
+                    </item>
+                </option>
+                <option name="title" xsi:type="string" translate="true">Advanced Robots Settings</option>
+            </options>
+            <onCancel>actionDone</onCancel>
+        </settings>
+        <fieldset name="robots_settings">
+            <settings>
+                <label/>
+                <collapsible>false</collapsible>
+            </settings>
+
+            <!-- Product Meta Robots Section -->
+            <container name="product_robots_section" sortOrder="100">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                        <item name="label" xsi:type="string" translate="true">Product Meta Robots Settings</item>
+                        <item name="collapsible" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+
+                <field name="apply_robots_to_products" sortOrder="10" formElement="checkbox">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="default" xsi:type="number">0</item>
+                            <item name="switcherConfig" xsi:type="array">
+                                <item name="enabled" xsi:type="boolean">true</item>
+                                <item name="rules" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="value" xsi:type="number">1</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.product_robots_section.use_category_robots_for_products</item>
+                                                <item name="callback" xsi:type="string">show</item>
+                                            </item>
+                                            <item name="1" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.product_robots_section.product_robots_meta_tag</item>
+                                                <item name="callback" xsi:type="string">show</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="value" xsi:type="number">0</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.product_robots_section.use_category_robots_for_products</item>
+                                                <item name="callback" xsi:type="string">hide</item>
+                                            </item>
+                                            <item name="1" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.product_robots_section.product_robots_meta_tag</item>
+                                                <item name="callback" xsi:type="string">hide</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>boolean</dataType>
+                        <label translate="true">Apply Robots to Category Products</label>
+                        <dataScope>apply_robots_to_products</dataScope>
+                        <tooltip>
+                            <description translate="true">Enable to apply robots meta tag to all products in this category.</description>
+                        </tooltip>
+                    </settings>
+                    <formElements>
+                        <checkbox>
+                            <settings>
+                                <valueMap>
+                                    <map name="false" xsi:type="number">0</map>
+                                    <map name="true" xsi:type="number">1</map>
+                                </valueMap>
+                                <prefer>toggle</prefer>
+                            </settings>
+                        </checkbox>
+                    </formElements>
+                </field>
+
+                <field name="use_category_robots_for_products" sortOrder="20" formElement="checkbox">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="default" xsi:type="number">1</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>boolean</dataType>
+                        <label translate="true">Use Category Meta Robots for Products</label>
+                        <dataScope>use_category_robots_for_products</dataScope>
+                        <tooltip>
+                            <description translate="true">When enabled, products will use the category's meta robots directives. Disable to set custom directives for products.</description>
+                        </tooltip>
+                    </settings>
+                    <formElements>
+                        <checkbox>
+                            <settings>
+                                <valueMap>
+                                    <map name="false" xsi:type="number">0</map>
+                                    <map name="true" xsi:type="number">1</map>
+                                </valueMap>
+                                <prefer>toggle</prefer>
+                            </settings>
+                        </checkbox>
+                    </formElements>
+                </field>
+
+                <field name="product_robots_meta_tag" sortOrder="30" formElement="multiselect" component="Hryvinskyi_SeoRobotsAdminUi/js/form/element/robots-textarea">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Custom Product Robots Directives</label>
+                        <dataScope>product_robots_meta_tag</dataScope>
+                        <elementTmpl>Hryvinskyi_SeoRobotsAdminUi/form/element/robots-textarea</elementTmpl>
+                        <tooltip>
+                            <description translate="true">Select directives for products in this category.</description>
+                        </tooltip>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">false</rule>
+                        </validation>
+                    </settings>
+                    <formElements>
+                        <multiselect>
+                            <settings>
+                                <options class="Hryvinskyi\SeoRobotsCategoryAdminUi\Model\Category\Attribute\Source\ProductDirectiveList"/>
+                            </settings>
+                        </multiselect>
+                    </formElements>
+                </field>
+            </container>
+
+            <!-- X-Robots Header Section -->
+            <container name="xrobots_section" sortOrder="200">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                        <item name="label" xsi:type="string" translate="true">X-Robots HTTP Header Settings</item>
+                        <item name="collapsible" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+
+                <field name="use_meta_for_x_robots" sortOrder="10" formElement="checkbox">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="default" xsi:type="number">1</item>
+                            <item name="switcherConfig" xsi:type="array">
+                                <item name="enabled" xsi:type="boolean">true</item>
+                                <item name="rules" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="value" xsi:type="number">1</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.xrobots_section.x_robots_header</item>
+                                                <item name="callback" xsi:type="string">hide</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="value" xsi:type="number">0</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.xrobots_section.x_robots_header</item>
+                                                <item name="callback" xsi:type="string">show</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>boolean</dataType>
+                        <label translate="true">Use Same as Meta Robots for X-Robots Header</label>
+                        <dataScope>use_meta_for_x_robots</dataScope>
+                        <tooltip>
+                            <description translate="true">When enabled, the X-Robots-Tag HTTP header will use the same directives as the meta robots tag.</description>
+                        </tooltip>
+                    </settings>
+                    <formElements>
+                        <checkbox>
+                            <settings>
+                                <valueMap>
+                                    <map name="false" xsi:type="number">0</map>
+                                    <map name="true" xsi:type="number">1</map>
+                                </valueMap>
+                                <prefer>toggle</prefer>
+                            </settings>
+                        </checkbox>
+                    </formElements>
+                </field>
+
+                <field name="x_robots_header" sortOrder="20" formElement="multiselect" component="Hryvinskyi_SeoRobotsAdminUi/js/form/element/robots-textarea">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">X-Robots-Tag Header Directives</label>
+                        <dataScope>x_robots_header</dataScope>
+                        <elementTmpl>Hryvinskyi_SeoRobotsAdminUi/form/element/robots-textarea</elementTmpl>
+                        <tooltip>
+                            <description translate="true">Select directives for the X-Robots-Tag HTTP header.</description>
+                        </tooltip>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">false</rule>
+                        </validation>
+                    </settings>
+                    <formElements>
+                        <multiselect>
+                            <settings>
+                                <options class="Hryvinskyi\SeoRobotsCategoryAdminUi\Model\Category\Attribute\Source\DirectiveList"/>
+                            </settings>
+                        </multiselect>
+                    </formElements>
+                </field>
+
+                <field name="apply_x_robots_to_products" sortOrder="30" formElement="checkbox">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="default" xsi:type="number">0</item>
+                            <item name="switcherConfig" xsi:type="array">
+                                <item name="enabled" xsi:type="boolean">true</item>
+                                <item name="rules" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="value" xsi:type="number">1</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.xrobots_section.use_category_x_robots_for_products</item>
+                                                <item name="callback" xsi:type="string">show</item>
+                                            </item>
+                                            <item name="1" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.xrobots_section.product_x_robots_header</item>
+                                                <item name="callback" xsi:type="string">show</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="value" xsi:type="number">0</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.xrobots_section.use_category_x_robots_for_products</item>
+                                                <item name="callback" xsi:type="string">hide</item>
+                                            </item>
+                                            <item name="1" xsi:type="array">
+                                                <item name="target" xsi:type="string">category_form.category_form.advanced_robots_modal.robots_settings.xrobots_section.product_x_robots_header</item>
+                                                <item name="callback" xsi:type="string">hide</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>boolean</dataType>
+                        <label translate="true">Apply X-Robots-Tag to Category Products</label>
+                        <dataScope>apply_x_robots_to_products</dataScope>
+                        <tooltip>
+                            <description translate="true">Enable to apply X-Robots-Tag HTTP header to all products in this category.</description>
+                        </tooltip>
+                    </settings>
+                    <formElements>
+                        <checkbox>
+                            <settings>
+                                <valueMap>
+                                    <map name="false" xsi:type="number">0</map>
+                                    <map name="true" xsi:type="number">1</map>
+                                </valueMap>
+                                <prefer>toggle</prefer>
+                            </settings>
+                        </checkbox>
+                    </formElements>
+                </field>
+
+                <field name="use_category_x_robots_for_products" sortOrder="40" formElement="checkbox">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="default" xsi:type="number">1</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>boolean</dataType>
+                        <label translate="true">Use Category X-Robots for Products</label>
+                        <dataScope>use_category_x_robots_for_products</dataScope>
+                        <tooltip>
+                            <description translate="true">When enabled, products will use the category's X-Robots-Tag directives.</description>
+                        </tooltip>
+                    </settings>
+                    <formElements>
+                        <checkbox>
+                            <settings>
+                                <valueMap>
+                                    <map name="false" xsi:type="number">0</map>
+                                    <map name="true" xsi:type="number">1</map>
+                                </valueMap>
+                                <prefer>toggle</prefer>
+                            </settings>
+                        </checkbox>
+                    </formElements>
+                </field>
+
+                <field name="product_x_robots_header" sortOrder="50" formElement="multiselect" component="Hryvinskyi_SeoRobotsAdminUi/js/form/element/robots-textarea">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">category</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Custom Product X-Robots Directives</label>
+                        <dataScope>product_x_robots_header</dataScope>
+                        <elementTmpl>Hryvinskyi_SeoRobotsAdminUi/form/element/robots-textarea</elementTmpl>
+                        <tooltip>
+                            <description translate="true">Select X-Robots-Tag directives for products in this category.</description>
+                        </tooltip>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">false</rule>
+                        </validation>
+                    </settings>
+                    <formElements>
+                        <multiselect>
+                            <settings>
+                                <options class="Hryvinskyi\SeoRobotsCategoryAdminUi\Model\Category\Attribute\Source\DirectiveList"/>
+                            </settings>
+                        </multiselect>
+                    </formElements>
+                </field>
+            </container>
+        </fieldset>
+    </modal>
+
+    <!-- Main Form Fields -->
     <fieldset name="search_engine_optimization">
-        <field name="robots_meta_tag" sortOrder="1000" formElement="multiselect" component="Hryvinskyi_SeoRobotsAdminUi/js/form/element/directive-multiselect">
+        <!-- Container to group robots field with advanced settings link -->
+        <container name="robots_meta_tag_group" sortOrder="1000" component="Magento_Ui/js/form/components/group">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="label" xsi:type="string" translate="true">Robots Meta Tag Directives</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
                     <item name="source" xsi:type="string">category</item>
                 </item>
             </argument>
-            <settings>
-                <dataType>text</dataType>
-                <label translate="true">Robots Meta Tag Directives</label>
-                <dataScope>robots_meta_tag</dataScope>
-                <elementTmpl>Hryvinskyi_SeoRobotsAdminUi/form/element/directive-multiselect</elementTmpl>
-                <tooltip>
-                    <description translate="true">Select multiple directives to control search engine indexing for this category page. Directives will be combined (e.g., selecting NOINDEX and NOFOLLOW creates "NOINDEX,NOFOLLOW"). Configure default settings at Stores > Configuration > Hryvinskyi Extensions -> SEO > Meta Robots > Robots Category</description>
-                </tooltip>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
-                </validation>
-            </settings>
-            <formElements>
-                <multiselect>
-                    <settings>
-                        <options class="Hryvinskyi\SeoRobotsCategoryAdminUi\Model\Category\Attribute\Source\DirectiveList"/>
-                    </settings>
-                </multiselect>
-            </formElements>
-        </field>
 
-        <field name="apply_robots_to_products" sortOrder="1001" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">category</item>
-                    <item name="default" xsi:type="number">0</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>boolean</dataType>
-                <label translate="true">Apply Robots to Category Products</label>
-                <dataScope>apply_robots_to_products</dataScope>
-                <tooltip>
-                    <description translate="true">Enable to apply robots meta tag to all products in this category. Configure default settings at Stores > Configuration > Hryvinskyi Extensions -> SEO > Meta Robots > Robots Category</description>
-                </tooltip>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="number">0</map>
-                            <map name="true" xsi:type="number">1</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
+            <field name="robots_meta_tag" formElement="multiselect" component="Hryvinskyi_SeoRobotsAdminUi/js/form/element/robots-textarea">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Robots Meta Tag Directives</label>
+                    <dataScope>robots_meta_tag</dataScope>
+                    <elementTmpl>Hryvinskyi_SeoRobotsAdminUi/form/element/robots-textarea</elementTmpl>
+                    <tooltip>
+                        <description translate="true">Select directives to control search engine indexing for this category page.</description>
+                    </tooltip>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </settings>
+                <formElements>
+                    <multiselect>
+                        <settings>
+                            <options class="Hryvinskyi\SeoRobotsCategoryAdminUi\Model\Category\Attribute\Source\DirectiveList"/>
+                        </settings>
+                    </multiselect>
+                </formElements>
+            </field>
 
-        <field name="product_robots_meta_tag" sortOrder="1002" formElement="multiselect" component="Hryvinskyi_SeoRobotsAdminUi/js/form/element/directive-multiselect">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">category</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>text</dataType>
-                <label translate="true">Robots Directives for Category Products</label>
-                <dataScope>product_robots_meta_tag</dataScope>
-                <elementTmpl>Hryvinskyi_SeoRobotsAdminUi/form/element/directive-multiselect</elementTmpl>
-                <tooltip>
-                    <description translate="true">Select multiple directives for products in this category (only applies if "Apply Robots to Category Products" is enabled). Choose "Use Category Robots" to inherit from category's directive settings. Configure defaults at Stores > Configuration > Hryvinskyi Extensions -> SEO > Meta Robots > Robots Category</description>
-                </tooltip>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
-                </validation>
-                <imports>
-                    <link name="visible">ns = ${ $.ns }, index = apply_robots_to_products:checked</link>
-                </imports>
-            </settings>
-            <formElements>
-                <multiselect>
-                    <settings>
-                        <options class="Hryvinskyi\SeoRobotsCategoryAdminUi\Model\Category\Attribute\Source\ProductDirectiveList"/>
-                    </settings>
-                </multiselect>
-            </formElements>
-        </field>
+            <!-- Advanced Robots Settings Link (inline with field) -->
+            <container name="advanced_robots_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                        <item name="template" xsi:type="string">ui/form/components/button/container</item>
+                        <item name="displayAsLink" xsi:type="boolean">true</item>
+                        <item name="additionalForGroup" xsi:type="boolean">true</item>
+                        <item name="title" xsi:type="string" translate="true">Advanced Robots Settings</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">category_form.category_form.advanced_robots_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </container>
+        </container>
     </fieldset>
 </form>
