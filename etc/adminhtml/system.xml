@@ -14,38 +14,7 @@
                     <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Enable Category Robots</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                        <comment><![CDATA[
-                            Enable robots meta tag management for categories and their products<br/>
-                            <strong style="font-size:18px">How to Use (v2.0)</strong><br/>
-                            <strong>Category Robots Settings:</strong><br/>
-                            1. Go to <strong>Catalog > Categories</strong><br/>
-                            2. Edit any category and expand <strong>Search Engine Optimization</strong> section<br/>
-                            3. Configure the following fields:<br/>
-                            <ul>
-                                <li><strong>Robots Meta Tag Directives</strong> - Select multiple directives to control category page indexing</li>
-                                <li><strong>Apply Robots to Category Products</strong> - Enable to apply robots settings to products in this category</li>
-                                <li><strong>Robots Directives for Category Products</strong> - Select directives for products (shown when toggle is enabled)</li>
-                            </ul>
-                            <br/>
-                            <strong>Available Directives:</strong><br/>
-                            <ul>
-                                <li><strong>Basic Indexing:</strong> index, noindex, follow, nofollow, all, none</li>
-                                <li><strong>Content Control:</strong> noarchive, nosnippet, notranslate, noimageindex</li>
-                                <li><strong>Advanced:</strong> max-snippet, max-image-preview, max-video-preview</li>
-                            </ul>
-                            <strong>Special Options:</strong><br/>
-                            <ul>
-                                <li><strong>Use Default</strong> - Leave empty to use system default settings</li>
-                                <li><strong>Use Category Robots</strong> - Products inherit category's directives</li>
-                            </ul>
-                            <br/>
-                            <strong>Example: Warehouse Deals Category</strong><br/>
-                            To prevent indexing of Warehouse Deals category and its products:<br/>
-                            1. Select <strong>NOINDEX</strong> and <strong>NOFOLLOW</strong> directives for Robots Meta Tag<br/>
-                            2. Enable <strong>Apply Robots to Category Products</strong><br/>
-                            3. Select <strong>Use Category Robots</strong> or choose specific directives for products<br/><br/>
-                            <strong>Note:</strong> You can select multiple directives to create custom combinations (e.g., NOINDEX + FOLLOW + NOARCHIVE)
-                        ]]></comment>
+                        <comment><![CDATA[Enable robots meta tag management for categories and their products. Configure in Catalog > Categories > Search Engine Optimization.]]></comment>
                     </field>
                 </group>
             </group>
